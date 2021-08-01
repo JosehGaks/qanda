@@ -1,1 +1,1 @@
-web: gunicorn myQa.wsgi --log-file -
+web: gunicorn myQa.wsgi
