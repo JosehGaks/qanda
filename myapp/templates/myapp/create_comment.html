@@ -1,0 +1,19 @@
+{% extends 'myapp/base.html' %}
+{% load django_markdown %}
+
+{% block content %}
+
+  {% if message %}
+    <strong>Enter a valid Answer!</strong>
+  {% endif %}
+
+  <form method="post" class="post-form" action="">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input class="btn pull-right btn-success" type="submit" value="Submit Comment" />
+  </form>
+    <script>var editor = new MediumEditor('.editable');</script>
+
+{% markdown_editor "#ans" %}
+{% markdown_media %}
+{% endblock content %}

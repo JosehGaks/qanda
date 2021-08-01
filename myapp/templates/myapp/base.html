@@ -1,0 +1,263 @@
+{% load staticfiles %}
+<!DOCTYPE HTML>
+<html lang="en">
+  <head>
+    <title>QA{% block title %}{% endblock title %}</title>
+    <meta charset="UTF-8"/>
+    <link rel="icon" type="image/png" href="static/qa/icon.ico">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+    <link href='//fonts.googleapis.com/css?family=Lobster' rel='stylesheet' type='text/css'>
+    <link href='//fonts.googleapis.com/css?family=Roboto:300' rel='stylesheet' type='text/css'>
+    <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" type="text/css">
+    <!-- Font Awesome -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.1/css/all.min.css"
+      rel="stylesheet"
+    />
+    <!-- Google Fonts -->
+    <link
+      href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- MDB -->
+    <link
+      href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css"
+      rel="stylesheet"
+    />
+    <link href="{% static 'css/qa.css' %}" rel="stylesheet"/>
+
+
+    <style media="screen">
+    @import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@200;300&display=swap');
+      hr{margin: 0px;}
+      html, body {
+
+          font-family: 'Montserrat', sans-serif;
+          font-size: 13px;
+          line-height: auto;
+          /* color: rgb(40, 40, 41); */
+          direction: ltr;
+          background-color: white;
+      }
+
+      tag {
+        border-radius: 3px;
+        padding: 2px;
+        margin: 1px;
+        background-color: #E1ECF4;
+        color: #39739D;
+
+      }
+      /* Dropdown Button */
+      .dropbtn {
+        background-color: transparent;
+        color: white;
+        padding: 16px;
+        font-size: 16px;
+        border: none;
+      }
+
+      /* The container <div> - needed to position the dropdown content */
+      .dropdown {
+        position: relative;
+        display: inline-block;
+      }
+
+      /* Dropdown Content (Hidden by Default) */
+      .dropdown-content {
+        display: none;
+        position: absolute;
+        background-color: #f1f1f1;
+        min-width: 160px;
+        box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+        z-index: 1;
+      }
+
+      /* Links inside the dropdown */
+      .dropdown-content a {
+        color: black;
+        padding: 12px 16px;
+        text-decoration: none;
+        display: block;
+      }
+
+      /* Change color of dropdown links on hover */
+      .dropdown-content a:hover {background-color: #ddd;}
+
+      /* Show the dropdown menu on hover */
+      .dropdown:hover .dropdown-content {display: block;}
+
+      /* Change the background color of the dropdown button when the dropdown content is shown */
+      .dropdown:hover .dropbtn {background-color: #3e8e41;}
+    </style>
+  </head>
+  <body>
+    <!-- <div class="topbar"></div> -->
+    <!-- Navbar -->
+      <nav class="navbar sticky-top navbar-expand-lg navbar-light bg-light">
+        <!-- Container wrapper -->
+        <div class="container container-fluid">
+          <!-- Toggle button -->
+          <button
+            class="navbar-toggler"
+            type="button"
+            data-mdb-toggle="collapse"
+            data-mdb-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent"
+            aria-expanded="false"
+            aria-label="Toggle navigation"
+          >
+            <i class="fas fa-bars"></i>
+          </button>
+
+          <!-- Collapsible wrapper -->
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <!-- Navbar brand -->
+            <a class="navbar-brand mt-2 mt-lg-0" href="{% url 'qa_index' %}">
+              <i class="far fa-question-circle" style="font-size: 25px;"> Q n A</i>
+            </a>
+            <!-- Left links -->
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link" href="/"><strong>Home</strong></a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#">Team</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Projects</a>
+              </li> -->
+            </ul>
+            <!-- Left links -->
+          </div>
+          <!-- Collapsible wrapper -->
+
+          <!-- Right elements -->
+          <div class="d-flex align-items-center">
+            <!-- Icon -->
+            <div class="search" style="margin-right: 5px;">
+              <form method="GET" action="{% url 'qa_search' %}" class="input-group">
+                  <input style="padding-left: 50px;" type="search" id="form1" value="" class="form-control" name="word" placeholder="search here..." aria-label="Search" />
+                  <input type="submit" class="btn btn-primary" value="Search">
+                </button>
+              </form>
+            </div>
+
+            <!-- Notifications -->
+            <a href="{% url 'qa_create_question' %}"  type="button" class="btn btn-dark" style="margin-right: 1em;">Ask Question</a>
+            <!-- Avatar -->
+
+          {% if user.is_authenticated %}
+          <div class="dropdown">
+            <button class="dropbtn">
+              <img
+                src="https://mdbootstrap.com/img/new/avatars/2.jpg"
+                class="rounded-circle"
+                height="25"
+                alt=""
+                loading="lazy"
+              />
+            </button>
+            <div class="dropdown-content">
+              <a href="#">My profile</a>
+              <a href="#">Settings</a>
+              <a href="/logout">Logout</a>
+            </div>
+          </div>
+            {% else %}
+              <div class="d-flex align-items-center">
+                <a href="/login" type="button" class="btn btn-link px-3 me-2" style="color: black;">
+                  Log In
+                </a>
+                <a href="/register" type="button" class="btn btn-dark">
+                  Sign Up
+                </a>
+              </div>
+            {% endif %}
+          </div>
+          <!-- Right elements -->
+        </div>
+        <!-- Container wrapper -->
+      </nav>
+
+    <div class="container">
+      {% if messages %}
+      {% for message in messages %}
+      <div class="alert {% if message.tags %}alert-{{ message.tags }}{% endif %}">{{ message }}</div>
+      {% endfor %}
+      {% endif %}
+
+        {% block content %}
+
+        {% endblock content %}
+
+      <!-- <div id="search">
+
+    	<button type="button" class="close">×</button>
+    	<form method="GET" action="{% url 'qa_search' %}">
+    	  <input type="search" value="" name="word" placeholder="type keyword(s) here" />
+    	  <input class="btn btn-lg btn-warning" type="submit" value="Find" />
+    	</form>
+
+      </div> -->
+
+    </div>
+    <hr>
+    <center>
+      <small><a href="/admin">Admin Panel</a></small></center>
+    <br/><br/>
+
+
+    <!-- Modal -->
+    <div class="modal fade" id="apiModal" tabindex="-1" role="dialog" aria-labelledby="APIModal" aria-hidden="true">
+      <div class="modal-dialog">
+	<div class="modal-content">
+	  <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            <h4 class="modal-title" id="myModalLabel"><span class="glyphicon glyphicon-cloud" aria-hidden="true"></span> API Access</h4>
+	  </div>
+	  <div class="modal-body">
+            <ul>
+              <li>
+		<b>List of Questions</b>
+		<br/>Retrieve the list of questions.
+		<br/>json URL : <code class="custom-code">http://djangoqa.azurewebsites.net/api/questions/?format=json</code>
+              </li>
+              <br/>
+              <li>
+		<b>List of Users</b>
+		<br/>Retrieve the list of users.
+		<br/>json URL : <code class="custom-code">http://djangoqa.azurewebsites.net/api/users/?format=json</code>
+              </li>
+            </ul>
+	  </div>
+	  <div class="modal-footer">
+            <button type="button" class="btn btn-info" data-dismiss="modal">Close</button>
+	  </div>
+	</div>
+      </div>
+    </div>
+
+    {% block js %}
+    <script>
+      $(function () {
+      $('a[href="#search"]').on('click', function(event) {
+      event.preventDefault();
+      $('#search').addClass('open');
+      $('#search > form > input[type="search"]').focus();
+      });
+
+      $('#search, #search button.close').on('click keyup', function(event) {
+      if (event.target == this || event.target.className == 'close' || event.keyCode == 27) {
+      $(this).removeClass('open');
+      }
+      });
+
+      });
+    </script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+    {% endblock js %}
+    {%block extra_js %}{% endblock extra_js %}
+    <!-- MDB -->
+  </body>
+</html>

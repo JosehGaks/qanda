@@ -1,0 +1,50 @@
+{% extends 'myapp/base.html' %}
+{% load django_markdown %}
+
+{% block content %}
+<!-- Card Regular -->
+<div class="card card-cascade">
+
+  <!-- Card image -->
+  <div class="view view-cascade overlay">
+    <img class="card-img-top pull-right" width="50px" height="50px" src="{% static "qa/user.png" %}" alt="Card image cap">
+    <a>
+      <div class="mask rgba-white-slight"></div>
+    </a>
+  </div>
+
+  <!-- Card content -->
+  <div class="card-body card-body-cascade text-center">
+
+    <!-- Title -->
+    <h4 class="card-title"><strong>{{ user.user.name }}</strong></h4>
+    <h2 class="pull-right">Points: {{ user.points }}</h2>
+    <h4 class="card-title"><strong>{{ user.user.email }}</strong></h4>
+    <!-- Subtitle -->
+    <h6 class="font-weight-bold indigo-text py-2">Web developer</h6>
+    <!-- Text -->
+    <p class="card-text">
+      <ul>
+        <li><b>is Active :</b> {{ user.user.is_active }} </li>
+        <li><b>Last Login :</b> {{ user.user.last_login }} </li>
+      </ul>
+    </p>
+
+    <!-- Facebook -->
+    <a type="button" class="btn-floating btn-small btn-fb"><i class="fab fa-facebook-f"></i></a>
+    <!-- Twitter -->
+    <a type="button" class="btn-floating btn-small btn-tw"><i class="fab fa-twitter"></i></a>
+    <!-- Google + -->
+    <a type="button" class="btn-floating btn-small btn-dribbble" href="{{ user.website }}"><i class="fab fa-dribbble"></i></a>
+
+  </div>
+
+  <!-- Card footer -->
+  <div class="card-footer text-muted text-center">
+    <b>Last Login :</b> {{ user.user.last_login }}
+  </div>
+
+</div>
+<!-- Card Regular -->
+
+{% endblock content %}

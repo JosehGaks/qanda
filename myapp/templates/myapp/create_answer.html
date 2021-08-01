@@ -1,0 +1,25 @@
+{% extends 'myapp/base.html' %}
+{% load django_markdown %}
+
+{% block content %}
+<div class="container">
+
+</div>
+  {% if message %}
+  <strong>Enter a valid Question!</strong>
+  {% endif %}
+
+  <form method="post" class="post-form" action="{% block action_url %}{% url 'qa_create_answer' view.kwargs.question_id %}{% endblock action_url %}">
+      {% csrf_token %}
+      {{ form.as_p }}
+      <input class="btn pull-right btn-success" type="submit" value="Submit Answer" />
+  </form>
+  <script>var editor = new MediumEditor('.editable');</script>
+
+
+{% endblock content %}
+
+{% block extra_js %}
+  {% markdown_editor "#id_answer_text" %}
+  {% markdown_media %}
+{% endblock %}
